@@ -57,7 +57,7 @@ const Questions = () => {
             { rowData.questions[0] }
             {
                 rowData.questions.length > 0 ? (
-                    <Chip label={ rowData.questions.length - 1 } style={{ transform: 'scale(0.8)', marginLeft: '.5rem' }} />
+                    <Chip label={ `+${ rowData.questions.length - 1 }` } style={{ transform: 'scale(0.8)', marginLeft: '.5rem' }} />
                 ) : null
             }
             </div>

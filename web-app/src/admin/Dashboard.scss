@@ -1,23 +1,44 @@
 @import url('https://fonts.googleapis.com/css2?family=Noto+Serif+Telugu:wght@100;400;800;900&family=Nunito+Sans:ital,wght@0,200;0,400;0,700;1,400&family=Raleway:wght@100;300;400;600&display=swap');
 @import "primeflex/primeflex.css";
+@import "../colors.scss";
 
-h1, h2, h3, h4, h5, h6, .p-card-title {
-    // font-family: 'Noto Serif Telugu', serif;
-    font-family: 'Nunito Sans', sans-serif;
+body {
+    background-image: linear-gradient($urBlue, lighten($urBlue, 10));
 }
 
-h1 {
-    font-size: 36px;
-}
+.admin {
+    h1, h2, h3, h4, h5, h6, .p-card-title {
+        // font-family: 'Noto Serif Telugu', serif;
+        font-family: 'Nunito Sans', sans-serif;
+    }
 
-body, span, td, .p-button-label {
-    font-family: 'Nunito Sans', sans-serif;
-}
+    h1 {
+        font-size: 36px;
+    }
 
-.container {
-    padding: 3rem;
+    body, span, td, .p-button-label, &::not(.pi) {
+        font-family: 'Nunito Sans', sans-serif;
+    }
+
+    .container {
+        padding: 3rem 5rem;
+
+        .p-card {
+            margin-top: 2rem;
+        }
+    }
+
+    .surface-0 {
+        padding: 3rem;
+        border-radius: 6px;
+    }
 
     .p-card {
-        margin-top: 3rem;
+        padding: 0;
+        overflow: hidden;
+
+        .p-card-body, .p-card-content {
+            padding: 0;
+        }
     }
 }

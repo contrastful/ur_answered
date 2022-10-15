@@ -35,9 +35,11 @@
             padding: 1rem 1rem 0.7rem 0;
             width: 100%;
             font-family: 'Nunito Sans', sans-serif;
-    
+            font-weight: 800;
+
             &::placeholder {
                 font-family: 'Nunito Sans', sans-serif;
+                font-weight: 200;
                 transition: all .3s;
                 color: rgb(185, 185, 185);
                 text-align: center;
@@ -47,6 +49,7 @@
             &:focus, &:hover {
                 &::placeholder {
                     color: white;
+                    // font-size: 30px;
                 }
 
                 border-bottom-color: white;
