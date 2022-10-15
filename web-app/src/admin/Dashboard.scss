@@ -41,4 +41,16 @@ body {
             padding: 0;
         }
     }
+
+    .questionLink {
+        text-decoration: none;
+        color: inherit;
+        border-bottom: 1px solid $urBlue;
+        transition: all .3s;
+        display: inline-block;
+
+        &:hover {
+            transform: translateX(3px);
+        }
+    }
 }

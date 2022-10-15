@@ -32,7 +32,7 @@ const train = async () => {
             }
 
             database.push({
-                category, questions, questionTag, answer, status: true, askedCount: row['Asked Count'], askedBy: row['Asked By']
+                category, questions, questionTag, answer, status: !!answer, askedCount: row['Asked Count'], askedBy: row['Asked By']
             })
 
             questions.forEach(question => {
