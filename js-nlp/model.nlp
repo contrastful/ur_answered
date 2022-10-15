@@ -5,7 +5,7 @@
     ],
     "forceNER": true,
     "nlu": {
-      "useNoneFeature": true
+      "useNoneFeature": false
     },
     "tag": "nlp",
     "threshold": 0.5,
@@ -17,7 +17,7 @@
   "nluManager": {
     "settings": {
       "tag": "nlu-manager",
-      "useNoneFeature": true
+      "useNoneFeature": false
     },
     "locales": [
       "en"
@@ -27,7 +27,7 @@
       "en": {
         "settings": {
           "locale": "en",
-          "useNoneFeature": true,
+          "useNoneFeature": false,
           "trainByDomain": false,
           "tag": "domain-manager-en",
           "nluByDomain": {
@@ -39,10 +39,6 @@
           "useStemDict": true
         },
         "stemDict": {
-          "question,semicolon-delimit": {
-            "intent": "Answer Tag",
-            "domain": "default"
-          },
           "cs,declar,do,how,i,major,my": {
             "intent": "CS Department:major_declaration",
             "domain": "default"
@@ -51,22 +47,102 @@
             "intent": "CS Department:major_declaration",
             "domain": "default"
           },
-          "cs,depart,for,i,in,is,known,major,should,the,what,whi": {
+          "cs,depart,for,is,known,the,what": {
             "intent": "CS Department:department_info",
+            "domain": "default"
+          },
+          "cs,i,in,major,should,whi": {
+            "intent": "CS Department:department_info",
+            "domain": "default"
+          },
+          "a,chang,do,how,i,request,room": {
+            "intent": "ResLife:room_change",
+            "domain": "default"
+          },
+          "can,chang,how,i,my,room": {
+            "intent": "ResLife:room_change",
+            "domain": "default"
+          },
+          "can,chang,how,i,roomat": {
+            "intent": "ResLife:room_change",
+            "domain": "default"
+          },
+          "do,friend,how,i,live,my,request,to,with": {
+            "intent": "ResLife:roommate_choice",
+            "domain": "default"
+          },
+          "roommat": {
+            "intent": "ResLife:roommate_choice",
+            "domain": "default"
+          },
+          "can,friend,how,i,my,room,with": {
+            "intent": "ResLife:roommate_choice",
+            "domain": "default"
+          },
+          "a,assign,can,end,how,i,not,random,roommat,up,with": {
+            "intent": "ResLife:roommate_choice",
+            "domain": "default"
+          },
+          "do,how,i,overload": {
+            "intent": "CCAS:procedure_overload",
+            "domain": "default"
+          },
+          "consid,is,overload,what": {
+            "intent": "CCAS:procedure_overload",
+            "domain": "default"
+          },
+          "20,can,credit,how,i,more,take,than": {
+            "intent": "CCAS:procedure_overload",
+            "domain": "default"
+          },
+          "a,add,can,cours,drop,how,i,or": {
+            "intent": "CCAS:procedure_add_drop",
+            "domain": "default"
+          },
+          "a,add,can,cours,i": {
+            "intent": "CCAS:procedure_add_drop",
+            "domain": "default"
+          },
+          "a,can,cours,drop,i": {
+            "intent": "CCAS:procedure_add_drop",
+            "domain": "default"
+          },
+          "abroad,can,i,studi,when": {
+            "intent": "CCAS:study_abroad",
+            "domain": "default"
+          },
+          "abroad,do,i,need,studi,to,what": {
+            "intent": "CCAS:study_abroad",
+            "domain": "default"
+          },
+          "abroad,can,i,in,senior,studi,year": {
+            "intent": "CCAS:study_abroad",
+            "domain": "default"
+          },
+          "a,abroad,as,can,freshman,i,studi": {
+            "intent": "CCAS:study_abroad",
+            "domain": "default"
+          },
+          "a,can,dorm,have,i,in,microwav,my": {
+            "intent": "ResLife:policy_items",
+            "domain": "default"
+          },
+          "a,can,have,i,in,minifridg,my,room": {
+            "intent": "ResLife:policy_items",
             "domain": "default"
           }
         },
         "intentDict": {
-          "Answer Tag": "default",
           "CS Department:major_declaration": "default",
-          "CS Department:department_info": "default"
+          "CS Department:department_info": "default",
+          "ResLife:room_change": "default",
+          "ResLife:roommate_choice": "default",
+          "CCAS:procedure_overload": "default",
+          "CCAS:procedure_add_drop": "default",
+          "CCAS:study_abroad": "default",
+          "ResLife:policy_items": "default"
         },
         "sentences": [
-          {
-            "domain": "default",
-            "utterance": "Question (semicolon-delimited)",
-            "intent": "Answer Tag"
-          },
           {
             "domain": "default",
             "utterance": "How do I declare my CS major?",
@@ -79,8 +155,108 @@
           },
           {
             "domain": "default",
-            "utterance": "What is the CS department known for? Why should I major in CS?",
+            "utterance": "What is the CS department known for?",
             "intent": "CS Department:department_info"
+          },
+          {
+            "domain": "default",
+            "utterance": "Why should I major in CS?",
+            "intent": "CS Department:department_info"
+          },
+          {
+            "domain": "default",
+            "utterance": "How do I request a room change?",
+            "intent": "ResLife:room_change"
+          },
+          {
+            "domain": "default",
+            "utterance": "How can I change my room?",
+            "intent": "ResLife:room_change"
+          },
+          {
+            "domain": "default",
+            "utterance": "How can I change roomates?",
+            "intent": "ResLife:room_change"
+          },
+          {
+            "domain": "default",
+            "utterance": "How do I request to live with my friend?",
+            "intent": "ResLife:roommate_choice"
+          },
+          {
+            "domain": "default",
+            "utterance": "Roommate",
+            "intent": "ResLife:roommate_choice"
+          },
+          {
+            "domain": "default",
+            "utterance": "How can I room with my friend?",
+            "intent": "ResLife:roommate_choice"
+          },
+          {
+            "domain": "default",
+            "utterance": "How can I not end up with a randomly assigned roommate?",
+            "intent": "ResLife:roommate_choice"
+          },
+          {
+            "domain": "default",
+            "utterance": "How do I overload?",
+            "intent": "CCAS:procedure_overload"
+          },
+          {
+            "domain": "default",
+            "utterance": "What is considered overloading?",
+            "intent": "CCAS:procedure_overload"
+          },
+          {
+            "domain": "default",
+            "utterance": "How can I take more than 20 credits?",
+            "intent": "CCAS:procedure_overload"
+          },
+          {
+            "domain": "default",
+            "utterance": "How can I add or drop a course?",
+            "intent": "CCAS:procedure_add_drop"
+          },
+          {
+            "domain": "default",
+            "utterance": "Can I add a course?",
+            "intent": "CCAS:procedure_add_drop"
+          },
+          {
+            "domain": "default",
+            "utterance": "Can I drop a course?",
+            "intent": "CCAS:procedure_add_drop"
+          },
+          {
+            "domain": "default",
+            "utterance": "When can I study abroad?",
+            "intent": "CCAS:study_abroad"
+          },
+          {
+            "domain": "default",
+            "utterance": "What do I need to study abroad?",
+            "intent": "CCAS:study_abroad"
+          },
+          {
+            "domain": "default",
+            "utterance": "Can I study abroad in senior year?",
+            "intent": "CCAS:study_abroad"
+          },
+          {
+            "domain": "default",
+            "utterance": "Can I study abroad as a Freshman?",
+            "intent": "CCAS:study_abroad"
+          },
+          {
+            "domain": "default",
+            "utterance": "Can I have a microwave in my dorm?",
+            "intent": "ResLife:policy_items"
+          },
+          {
+            "domain": "default",
+            "utterance": "Can I have a minifridge in my room?",
+            "intent": "ResLife:policy_items"
           }
         ],
         "domains": {
@@ -97,8 +273,7 @@
               "log": true
             },
             "features": {
-              "question": 1,
-              "semicolon-delimit": 1,
+              "20": 1,
               "how": 1,
               "do": 1,
               "i": 1,
@@ -117,18 +292,55 @@
               "known": 1,
               "whi": 1,
               "should": 1,
-              "in": 1
+              "in": 1,
+              "request": 1,
+              "room": 1,
+              "chang": 1,
+              "can": 1,
+              "roomat": 1,
+              "to": 1,
+              "live": 1,
+              "with": 1,
+              "friend": 1,
+              "roommat": 1,
+              "not": 1,
+              "end": 1,
+              "up": 1,
+              "random": 1,
+              "assign": 1,
+              "overload": 1,
+              "consid": 1,
+              "take": 1,
+              "more": 1,
+              "than": 1,
+              "credit": 1,
+              "add": 1,
+              "or": 1,
+              "drop": 1,
+              "cours": 1,
+              "when": 1,
+              "studi": 1,
+              "abroad": 1,
+              "senior": 1,
+              "year": 1,
+              "as": 1,
+              "freshman": 1,
+              "have": 1,
+              "microwav": 1,
+              "dorm": 1,
+              "minifridg": 1
             },
             "intents": {
-              "Answer Tag": 1,
               "CS Department:major_declaration": 1,
-              "CS Department:department_info": 1
+              "CS Department:department_info": 1,
+              "ResLife:room_change": 1,
+              "ResLife:roommate_choice": 1,
+              "CCAS:procedure_overload": 1,
+              "CCAS:procedure_add_drop": 1,
+              "CCAS:study_abroad": 1,
+              "ResLife:policy_items": 1
             },
             "intentFeatures": {
-              "Answer Tag": {
-                "question": 1,
-                "semicolon-delimit": 1
-              },
               "CS Department:major_declaration": {
                 "how": 1,
                 "do": 1,
@@ -156,30 +368,130 @@
                 "i": 1,
                 "major": 1,
                 "in": 1
+              },
+              "ResLife:room_change": {
+                "how": 1,
+                "do": 1,
+                "i": 1,
+                "request": 1,
+                "a": 1,
+                "room": 1,
+                "chang": 1,
+                "can": 1,
+                "my": 1,
+                "roomat": 1
+              },
+              "ResLife:roommate_choice": {
+                "how": 1,
+                "do": 1,
+                "i": 1,
+                "request": 1,
+                "to": 1,
+                "live": 1,
+                "with": 1,
+                "my": 1,
+                "friend": 1,
+                "roommat": 1,
+                "can": 1,
+                "room": 1,
+                "not": 1,
+                "end": 1,
+                "up": 1,
+                "a": 1,
+                "random": 1,
+                "assign": 1
+              },
+              "CCAS:procedure_overload": {
+                "20": 1,
+                "how": 1,
+                "do": 1,
+                "i": 1,
+                "overload": 1,
+                "what": 1,
+                "is": 1,
+                "consid": 1,
+                "can": 1,
+                "take": 1,
+                "more": 1,
+                "than": 1,
+                "credit": 1
+              },
+              "CCAS:procedure_add_drop": {
+                "how": 1,
+                "can": 1,
+                "i": 1,
+                "add": 1,
+                "or": 1,
+                "drop": 1,
+                "a": 1,
+                "cours": 1
+              },
+              "CCAS:study_abroad": {
+                "when": 1,
+                "can": 1,
+                "i": 1,
+                "studi": 1,
+                "abroad": 1,
+                "what": 1,
+                "do": 1,
+                "need": 1,
+                "to": 1,
+                "in": 1,
+                "senior": 1,
+                "year": 1,
+                "as": 1,
+                "a": 1,
+                "freshman": 1
+              },
+              "ResLife:policy_items": {
+                "can": 1,
+                "i": 1,
+                "have": 1,
+                "a": 1,
+                "microwav": 1,
+                "in": 1,
+                "my": 1,
+                "dorm": 1,
+                "minifridg": 1,
+                "room": 1
               }
             },
             "featuresToIntent": {
-              "question": [
-                "Answer Tag"
-              ],
-              "semicolon-delimit": [
-                "Answer Tag"
+              "20": [
+                "CCAS:procedure_overload"
               ],
               "how": [
-                "CS Department:major_declaration"
+                "CS Department:major_declaration",
+                "ResLife:room_change",
+                "ResLife:roommate_choice",
+                "CCAS:procedure_overload",
+                "CCAS:procedure_add_drop"
               ],
               "do": [
-                "CS Department:major_declaration"
+                "CS Department:major_declaration",
+                "ResLife:room_change",
+                "ResLife:roommate_choice",
+                "CCAS:procedure_overload",
+                "CCAS:study_abroad"
               ],
               "i": [
                 "CS Department:major_declaration",
-                "CS Department:department_info"
+                "CS Department:department_info",
+                "ResLife:room_change",
+                "ResLife:roommate_choice",
+                "CCAS:procedure_overload",
+                "CCAS:procedure_add_drop",
+                "CCAS:study_abroad",
+                "ResLife:policy_items"
               ],
               "declar": [
                 "CS Department:major_declaration"
               ],
               "my": [
-                "CS Department:major_declaration"
+                "CS Department:major_declaration",
+                "ResLife:room_change",
+                "ResLife:roommate_choice",
+                "ResLife:policy_items"
               ],
               "cs": [
                 "CS Department:major_declaration",
@@ -191,23 +503,32 @@
               ],
               "what": [
                 "CS Department:major_declaration",
-                "CS Department:department_info"
+                "CS Department:department_info",
+                "CCAS:procedure_overload",
+                "CCAS:study_abroad"
               ],
               "class": [
                 "CS Department:major_declaration"
               ],
               "need": [
-                "CS Department:major_declaration"
+                "CS Department:major_declaration",
+                "CCAS:study_abroad"
               ],
               "for": [
                 "CS Department:major_declaration",
                 "CS Department:department_info"
               ],
               "a": [
-                "CS Department:major_declaration"
+                "CS Department:major_declaration",
+                "ResLife:room_change",
+                "ResLife:roommate_choice",
+                "CCAS:procedure_add_drop",
+                "CCAS:study_abroad",
+                "ResLife:policy_items"
               ],
               "is": [
-                "CS Department:department_info"
+                "CS Department:department_info",
+                "CCAS:procedure_overload"
               ],
               "the": [
                 "CS Department:department_info"
@@ -225,12 +546,131 @@
                 "CS Department:department_info"
               ],
               "in": [
-                "CS Department:department_info"
+                "CS Department:department_info",
+                "CCAS:study_abroad",
+                "ResLife:policy_items"
+              ],
+              "request": [
+                "ResLife:room_change",
+                "ResLife:roommate_choice"
+              ],
+              "room": [
+                "ResLife:room_change",
+                "ResLife:roommate_choice",
+                "ResLife:policy_items"
+              ],
+              "chang": [
+                "ResLife:room_change"
+              ],
+              "can": [
+                "ResLife:room_change",
+                "ResLife:roommate_choice",
+                "CCAS:procedure_overload",
+                "CCAS:procedure_add_drop",
+                "CCAS:study_abroad",
+                "ResLife:policy_items"
+              ],
+              "roomat": [
+                "ResLife:room_change"
+              ],
+              "to": [
+                "ResLife:roommate_choice",
+                "CCAS:study_abroad"
+              ],
+              "live": [
+                "ResLife:roommate_choice"
+              ],
+              "with": [
+                "ResLife:roommate_choice"
+              ],
+              "friend": [
+                "ResLife:roommate_choice"
+              ],
+              "roommat": [
+                "ResLife:roommate_choice"
+              ],
+              "not": [
+                "ResLife:roommate_choice"
+              ],
+              "end": [
+                "ResLife:roommate_choice"
+              ],
+              "up": [
+                "ResLife:roommate_choice"
+              ],
+              "random": [
+                "ResLife:roommate_choice"
+              ],
+              "assign": [
+                "ResLife:roommate_choice"
+              ],
+              "overload": [
+                "CCAS:procedure_overload"
+              ],
+              "consid": [
+                "CCAS:procedure_overload"
+              ],
+              "take": [
+                "CCAS:procedure_overload"
+              ],
+              "more": [
+                "CCAS:procedure_overload"
+              ],
+              "than": [
+                "CCAS:procedure_overload"
+              ],
+              "credit": [
+                "CCAS:procedure_overload"
+              ],
+              "add": [
+                "CCAS:procedure_add_drop"
+              ],
+              "or": [
+                "CCAS:procedure_add_drop"
+              ],
+              "drop": [
+                "CCAS:procedure_add_drop"
+              ],
+              "cours": [
+                "CCAS:procedure_add_drop"
+              ],
+              "when": [
+                "CCAS:study_abroad"
+              ],
+              "studi": [
+                "CCAS:study_abroad"
+              ],
+              "abroad": [
+                "CCAS:study_abroad"
+              ],
+              "senior": [
+                "CCAS:study_abroad"
+              ],
+              "year": [
+                "CCAS:study_abroad"
+              ],
+              "as": [
+                "CCAS:study_abroad"
+              ],
+              "freshman": [
+                "CCAS:study_abroad"
+              ],
+              "have": [
+                "ResLife:policy_items"
+              ],
+              "microwav": [
+                "ResLife:policy_items"
+              ],
+              "dorm": [
+                "ResLife:policy_items"
+              ],
+              "minifridg": [
+                "ResLife:policy_items"
               ]
             },
             "neuralNetwork": {
               "settings": {
-                "useNoneFeature": true,
+                "useNoneFeature": false,
                 "locale": "en",
                 "tag": "nlu-en",
                 "keepStopwords": true,
@@ -242,8 +682,6 @@
                 "log": true
               },
               "features": [
-                "question",
-                "semicolon-delimit",
                 "how",
                 "do",
                 "i",
@@ -263,114 +701,526 @@
                 "whi",
                 "should",
                 "in",
-                "nonefeature"
+                "request",
+                "room",
+                "chang",
+                "can",
+                "roomat",
+                "to",
+                "live",
+                "with",
+                "friend",
+                "roommat",
+                "not",
+                "end",
+                "up",
+                "random",
+                "assign",
+                "overload",
+                "consid",
+                "20",
+                "take",
+                "more",
+                "than",
+                "credit",
+                "add",
+                "or",
+                "drop",
+                "cours",
+                "when",
+                "studi",
+                "abroad",
+                "senior",
+                "year",
+                "as",
+                "freshman",
+                "have",
+                "microwav",
+                "dorm",
+                "minifridg"
               ],
               "intents": [
-                "Answer Tag",
                 "CS Department:major_declaration",
                 "CS Department:department_info",
-                "None"
+                "ResLife:room_change",
+                "ResLife:roommate_choice",
+                "CCAS:procedure_overload",
+                "CCAS:procedure_add_drop",
+                "CCAS:study_abroad",
+                "ResLife:policy_items"
               ],
               "perceptrons": [
                 [
-                  6.1495041847229,
-                  6.1495041847229,
-                  -0.215573251247406,
-                  -0.31194671988487244,
-                  -0.39979463815689087,
-                  -0.215573251247406,
-                  -0.215573251247406,
-                  -0.39979463815689087,
-                  -0.39979463815689087,
-                  -0.18079672753810883,
-                  -0.09286539256572723,
-                  -0.09286539256572723,
-                  -0.18079672753810883,
-                  -0.09286539256572723,
-                  -0.0851001888513565,
-                  -0.0851001888513565,
-                  -0.0851001888513565,
-                  -0.0851001888513565,
-                  -0.0851001888513565,
-                  -0.0851001888513565,
-                  -0.0851001888513565,
-                  -1.8456804752349854,
-                  1.948084028420341
+                  0.3524605333805084,
+                  2.1518850326538086,
+                  -0.34403401613235474,
+                  3.406219482421875,
+                  2.712413787841797,
+                  2.856855869293213,
+                  3.8512308597564697,
+                  0.35607582330703735,
+                  2.3123698234558105,
+                  1.420972466468811,
+                  1.317996859550476,
+                  1.0732837915420532,
+                  -1.035705804824829,
+                  -0.9617031216621399,
+                  -0.9617031216621399,
+                  -0.9617031216621399,
+                  -1.8655366897583008,
+                  -1.8655366897583008,
+                  -1.9273322820663452,
+                  -1.2947789430618286,
+                  -0.8531728982925415,
+                  -0.9132219552993774,
+                  -0.6268844604492188,
+                  -0.046302035450935364,
+                  -1.4079699516296387,
+                  -0.49878576397895813,
+                  -0.6404880881309509,
+                  -0.5042060017585754,
+                  -0.10058455914258957,
+                  -0.08768440037965775,
+                  -0.08768440037965775,
+                  -0.08768440037965775,
+                  -0.08768440037965775,
+                  -0.08768440037965775,
+                  -1.4349093437194824,
+                  -0.0501343198120594,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  -0.15124423801898956,
+                  -0.0524124875664711,
+                  -0.12533527612686157,
+                  -0.23120807111263275,
+                  0,
+                  -0.8801340460777283,
+                  -0.8801340460777283,
+                  0,
+                  0,
+                  -0.006095454096794128,
+                  -0.006095454096794128,
+                  -0.058533139526844025,
+                  -0.058533139526844025,
+                  -0.058533139526844025,
+                  0,
+                  -0.7121833022678683
                 ],
                 [
-                  -0.28280240297317505,
-                  -0.28280240297317505,
-                  1.6686116456985474,
-                  3.2190895080566406,
-                  1.8458895683288574,
-                  1.6686116456985474,
-                  1.6686116456985474,
-                  1.8458895683288574,
-                  1.8458895683288574,
-                  0.1772257387638092,
-                  1.5504261255264282,
-                  1.5504261255264282,
-                  0.1772257387638092,
-                  1.5504261255264282,
-                  -1.1507477760314941,
-                  -1.1507477760314941,
-                  -1.1507477760314941,
-                  -1.1507477760314941,
-                  -1.1507477760314941,
-                  -1.1507477760314941,
-                  -1.1507477760314941,
-                  -0.5125351548194885,
-                  0.5226876548169519
+                  -1.2846722602844238,
+                  -2.364780902862549,
+                  -0.2890908718109131,
+                  -0.6438408493995667,
+                  -1.0774962902069092,
+                  3.7341113090515137,
+                  1.2654649019241333,
+                  0.06228944659233093,
+                  -1.2045543193817139,
+                  -1.3446792364120483,
+                  1.1938433647155762,
+                  -1.7092351913452148,
+                  1.4774529933929443,
+                  2.4686293601989746,
+                  2.4686293601989746,
+                  2.4686293601989746,
+                  3.2317557334899902,
+                  3.2317557334899902,
+                  2.699002742767334,
+                  -0.12000388652086258,
+                  -0.27489885687828064,
+                  -0.2656410038471222,
+                  -1.1244252920150757,
+                  -0.0751228928565979,
+                  -0.15668651461601257,
+                  -0.04235734045505524,
+                  -0.12688161432743073,
+                  -0.08473819494247437,
+                  -0.40538880228996277,
+                  -0.020952986553311348,
+                  -0.020952986553311348,
+                  -0.020952986553311348,
+                  -0.020952986553311348,
+                  -0.020952986553311348,
+                  -1.0665687322616577,
+                  -0.969272255897522,
+                  -0.033067621290683746,
+                  -0.033067621290683746,
+                  -0.033067621290683746,
+                  -0.033067621290683746,
+                  -0.033067621290683746,
+                  -0.06350458413362503,
+                  -0.004785892087966204,
+                  -0.04702308028936386,
+                  -0.12619411945343018,
+                  -0.0562746524810791,
+                  -0.560077428817749,
+                  -0.560077428817749,
+                  -0.32812976837158203,
+                  -0.32812976837158203,
+                  0,
+                  0,
+                  -0.15546874701976776,
+                  -0.0835927426815033,
+                  -0.0835927426815033,
+                  -0.037365928292274475,
+                  0.4120904590470333
                 ],
                 [
-                  -0.07870776206254959,
-                  -0.07870776206254959,
-                  -0.3849920928478241,
-                  -1.3096402883529663,
-                  0.2793002128601074,
-                  -0.3849920928478241,
-                  -0.3849920928478241,
-                  0.2793002128601074,
-                  0.2793002128601074,
-                  0.7775372862815857,
-                  -0.7898257374763489,
-                  -0.7898257374763489,
-                  0.7775372862815857,
-                  -0.7898257374763489,
-                  1.6943309307098389,
-                  1.6943309307098389,
-                  1.6943309307098389,
-                  1.6943309307098389,
-                  1.6943309307098389,
-                  1.6943309307098389,
-                  1.6943309307098389,
-                  -0.11420764774084091,
-                  0.032533421325109106
+                  1.9516863822937012,
+                  -0.6195405125617981,
+                  0.20884349942207336,
+                  -0.45417529344558716,
+                  -0.4750772714614868,
+                  -0.45417529344558716,
+                  -0.45417529344558716,
+                  -0.00808255560696125,
+                  0,
+                  0,
+                  0,
+                  -0.41195812821388245,
+                  -0.00808255560696125,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  -1.1787219047546387,
+                  1.4853122234344482,
+                  3.083911895751953,
+                  8.577925682067871,
+                  0.8299291133880615,
+                  2.720327138900757,
+                  -0.5920909643173218,
+                  -0.5920909643173218,
+                  -3.0768423080444336,
+                  -2.5247936248779297,
+                  -0.611193835735321,
+                  -0.3681822121143341,
+                  -0.3681822121143341,
+                  -0.3681822121143341,
+                  -0.3681822121143341,
+                  -0.3681822121143341,
+                  -1.6195380687713623,
+                  -0.00808255560696125,
+                  -0.667409360408783,
+                  -0.667409360408783,
+                  -0.667409360408783,
+                  -0.667409360408783,
+                  -0.667409360408783,
+                  -0.769690752029419,
+                  -0.5914173126220703,
+                  -0.6788307428359985,
+                  -0.8440524339675903,
+                  -0.23151984810829163,
+                  -0.4244565963745117,
+                  -0.4244565963745117,
+                  -0.06902813166379929,
+                  -0.06902813166379929,
+                  -0.08763746917247772,
+                  -0.08763746917247772,
+                  -1.0922038555145264,
+                  -0.07847516983747482,
+                  -0.07847516983747482,
+                  -0.9853781461715698,
+                  0.024247210251903017
                 ],
                 [
-                  -1.8430408239364624,
-                  -1.8430408239364624,
-                  -0.37995681166648865,
-                  -0.5494213104248047,
-                  -0.7004693150520325,
-                  -0.37995681166648865,
-                  -0.37995681166648865,
-                  -0.7004693150520325,
-                  -0.7004693150520325,
-                  -0.31928765773773193,
-                  -0.16833901405334473,
-                  -0.16833901405334473,
-                  -0.31928765773773193,
-                  -0.16833901405334473,
-                  -0.1503879576921463,
-                  -0.1503879576921463,
-                  -0.1503879576921463,
-                  -0.1503879576921463,
-                  -0.1503879576921463,
-                  -0.1503879576921463,
-                  -0.1503879576921463,
-                  10.13537883758545,
-                  3.807861688299607
+                  -0.23899202048778534,
+                  -1.3361191749572754,
+                  -2.1150550842285156,
+                  -0.7394489049911499,
+                  1.513986349105835,
+                  -1.0234202146530151,
+                  -0.7394489049911499,
+                  -0.8703916072845459,
+                  0,
+                  -0.13068559765815735,
+                  -0.20486359298229218,
+                  -2.269717216491699,
+                  -0.6950197815895081,
+                  -0.20486359298229218,
+                  -0.20486359298229218,
+                  -0.20486359298229218,
+                  0,
+                  0,
+                  -0.8145949244499207,
+                  0.4954323470592499,
+                  1.1923792362213135,
+                  -2.6964056491851807,
+                  -0.7650342583656311,
+                  0,
+                  0.8114324808120728,
+                  0.9868043065071106,
+                  5.552879810333252,
+                  5.360640048980713,
+                  9.835752487182617,
+                  0.18724481761455536,
+                  0.18724481761455536,
+                  0.18724481761455536,
+                  0.18724481761455536,
+                  0.18724481761455536,
+                  -1.322343349456787,
+                  -0.48472028970718384,
+                  -0.49862271547317505,
+                  -0.49862271547317505,
+                  -0.49862271547317505,
+                  -0.49862271547317505,
+                  -0.49862271547317505,
+                  -0.8130978941917419,
+                  -0.4439007043838501,
+                  -0.7287605404853821,
+                  -1.0496090650558472,
+                  -0.17692971229553223,
+                  -0.5934745669364929,
+                  -0.5934745669364929,
+                  -0.08041024208068848,
+                  -0.08041024208068848,
+                  -0.0469399131834507,
+                  -0.0469399131834507,
+                  -0.6972455978393555,
+                  -0.25437772274017334,
+                  -0.25437772274017334,
+                  -0.34741953015327454,
+                  3.4349771810150203
+                ],
+                [
+                  2.774858236312866,
+                  1.9510334730148315,
+                  0.7494889497756958,
+                  -1.0453702211380005,
+                  -2.1707022190093994,
+                  -1.9937235116958618,
+                  -1.1687381267547607,
+                  1.0487951040267944,
+                  -0.07173862308263779,
+                  -0.8460761308670044,
+                  -0.8819687962532043,
+                  -2.002337694168091,
+                  1.8991106748580933,
+                  -0.7587977647781372,
+                  -0.7587977647781372,
+                  -0.7587977647781372,
+                  0,
+                  0,
+                  -0.2619187831878662,
+                  -1.1362906694412231,
+                  -1.1119283437728882,
+                  -2.128908157348633,
+                  -1.2023831605911255,
+                  -1.1069135665893555,
+                  -1.2488296031951904,
+                  -0.5244280695915222,
+                  -0.7121313810348511,
+                  -0.5907613039016724,
+                  -0.8654893040657043,
+                  -0.08964322507381439,
+                  -0.08964322507381439,
+                  -0.08964322507381439,
+                  -0.08964322507381439,
+                  -0.08964322507381439,
+                  7.7062296867370605,
+                  2.7240941524505615,
+                  2.2058770656585693,
+                  2.2058770656585693,
+                  2.2058770656585693,
+                  2.2058770656585693,
+                  2.2058770656585693,
+                  -0.7047051191329956,
+                  -0.41404491662979126,
+                  -0.657075822353363,
+                  -0.9392383694648743,
+                  -0.30616283416748047,
+                  -1.2967320680618286,
+                  -1.2967320680618286,
+                  -0.10826022922992706,
+                  -0.10826022922992706,
+                  -0.011167524382472038,
+                  -0.011167524382472038,
+                  -0.10293895751237869,
+                  -0.059526219964027405,
+                  -0.059526219964027405,
+                  -0.020437320694327354,
+                  0.9459543731143388
+                ],
+                [
+                  -2.2786073684692383,
+                  -0.9714804887771606,
+                  0.65589439868927,
+                  -0.015963969752192497,
+                  -1.3008921146392822,
+                  -0.40533018112182617,
+                  -0.40533018112182617,
+                  -0.5560829043388367,
+                  -0.37439998984336853,
+                  -0.5560829043388367,
+                  -0.37439998984336853,
+                  2.5896551609039307,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  -1.5627764463424683,
+                  -0.2712092399597168,
+                  -0.8435041308403015,
+                  -0.8372736573219299,
+                  1.6865043640136719,
+                  -0.39421647787094116,
+                  -0.09377182275056839,
+                  0,
+                  -0.5583143830299377,
+                  0,
+                  -0.5641122460365295,
+                  -0.5583143830299377,
+                  -0.5583143830299377,
+                  -0.5583143830299377,
+                  -0.5583143830299377,
+                  -0.5583143830299377,
+                  0,
+                  0,
+                  -0.2572885751724243,
+                  -0.2572885751724243,
+                  -0.2572885751724243,
+                  -0.2572885751724243,
+                  -0.2572885751724243,
+                  2.9242022037506104,
+                  -0.37234988808631897,
+                  2.7897796630859375,
+                  6.098550319671631,
+                  -0.34124189615249634,
+                  -1.8538898229599,
+                  -1.8538898229599,
+                  -0.2656507194042206,
+                  -0.2656507194042206,
+                  -0.7618175148963928,
+                  -0.7618175148963928,
+                  -1.1728641986846924,
+                  -0.6174898147583008,
+                  -0.6174898147583008,
+                  -0.3885125517845154,
+                  0.3281937325742356
+                ],
+                [
+                  -1.646895170211792,
+                  0.06254006177186966,
+                  0.9572145938873291,
+                  -0.13523297011852264,
+                  -1.559841275215149,
+                  -1.0608549118041992,
+                  -0.9327442049980164,
+                  0.48368918895721436,
+                  -0.3906833529472351,
+                  0.8068370819091797,
+                  -0.5758212804794312,
+                  -1.2807607650756836,
+                  -0.3000693917274475,
+                  -0.05311848595738411,
+                  -0.05311848595738411,
+                  -0.05311848595738411,
+                  -0.13891737163066864,
+                  -0.13891737163066864,
+                  -0.3574974536895752,
+                  -0.2538451850414276,
+                  -0.7623253464698792,
+                  -0.6413811445236206,
+                  1.1025588512420654,
+                  -0.31886065006256104,
+                  1.2623611688613892,
+                  -0.08244647830724716,
+                  -0.1997261941432953,
+                  -0.08244647830724716,
+                  -0.2535933256149292,
+                  -0.07992084324359894,
+                  -0.07992084324359894,
+                  -0.07992084324359894,
+                  -0.07992084324359894,
+                  -0.07992084324359894,
+                  -0.39280614256858826,
+                  -0.22702114284038544,
+                  -0.18376919627189636,
+                  -0.18376919627189636,
+                  -0.18376919627189636,
+                  -0.18376919627189636,
+                  -0.18376919627189636,
+                  -0.37127888202667236,
+                  -0.00497056357562542,
+                  -0.3335582911968231,
+                  -0.6987624168395996,
+                  1.497269630432129,
+                  5.229715347290039,
+                  5.229715347290039,
+                  0.9358292818069458,
+                  0.9358292818069458,
+                  1.398896336555481,
+                  1.398896336555481,
+                  -0.9392039179801941,
+                  -0.4136163294315338,
+                  -0.4136163294315338,
+                  -0.3543991148471832,
+                  0.25360288496226147
+                ],
+                [
+                  -2.161980152130127,
+                  -0.727547824382782,
+                  -0.6853306889533997,
+                  -0.14797525107860565,
+                  2.5735461711883545,
+                  -0.8350805044174194,
+                  -0.8241626620292664,
+                  -0.18976981937885284,
+                  -0.16304431855678558,
+                  -0.16304431855678558,
+                  -0.18976981937885284,
+                  1.9186897277832031,
+                  -0.00504097156226635,
+                  -0.00504097156226635,
+                  -0.00504097156226635,
+                  -0.00504097156226635,
+                  -0.36299315094947815,
+                  -0.36299315094947815,
+                  2.9773757457733154,
+                  -0.27198415994644165,
+                  0.8528531193733215,
+                  -1.010744333267212,
+                  0.57947838306427,
+                  -0.05360471457242966,
+                  -0.016460007056593895,
+                  -0.016460007056593895,
+                  -0.6988686323165894,
+                  -0.5033935904502869,
+                  -0.1419742852449417,
+                  -0.11426232010126114,
+                  -0.11426232010126114,
+                  -0.11426232010126114,
+                  -0.11426232010126114,
+                  -0.11426232010126114,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  -0.6448251605033875,
+                  -0.09062999486923218,
+                  -0.5623651742935181,
+                  -1.130819320678711,
+                  -0.018263529986143112,
+                  -0.8038530945777893,
+                  -0.8038530945777893,
+                  -0.5720639824867249,
+                  -0.5720639824867249,
+                  -0.1492173820734024,
+                  -0.1492173820734024,
+                  4.026426792144775,
+                  1.628135085105896,
+                  1.628135085105896,
+                  2.398486375808716,
+                  -0.35771558083325466
                 ]
               ]
             }
@@ -382,10 +1232,6 @@
     "extraSentences": [
       [
         "en",
-        "Question (semicolon-delimited)"
-      ],
-      [
-        "en",
         "How do I declare my CS major?"
       ],
       [
@@ -394,7 +1240,87 @@
       ],
       [
         "en",
-        "What is the CS department known for? Why should I major in CS?"
+        "What is the CS department known for?"
+      ],
+      [
+        "en",
+        "Why should I major in CS?"
+      ],
+      [
+        "en",
+        "How do I request a room change?"
+      ],
+      [
+        "en",
+        "How can I change my room?"
+      ],
+      [
+        "en",
+        "How can I change roomates?"
+      ],
+      [
+        "en",
+        "How do I request to live with my friend?"
+      ],
+      [
+        "en",
+        "Roommate"
+      ],
+      [
+        "en",
+        "How can I room with my friend?"
+      ],
+      [
+        "en",
+        "How can I not end up with a randomly assigned roommate?"
+      ],
+      [
+        "en",
+        "How do I overload?"
+      ],
+      [
+        "en",
+        "What is considered overloading?"
+      ],
+      [
+        "en",
+        "How can I take more than 20 credits?"
+      ],
+      [
+        "en",
+        "How can I add or drop a course?"
+      ],
+      [
+        "en",
+        "Can I add a course?"
+      ],
+      [
+        "en",
+        "Can I drop a course?"
+      ],
+      [
+        "en",
+        "When can I study abroad?"
+      ],
+      [
+        "en",
+        "What do I need to study abroad?"
+      ],
+      [
+        "en",
+        "Can I study abroad in senior year?"
+      ],
+      [
+        "en",
+        "Can I study abroad as a Freshman?"
+      ],
+      [
+        "en",
+        "Can I have a microwave in my dorm?"
+      ],
+      [
+        "en",
+        "Can I have a minifridge in my room?"
       ]
     ]
   },
@@ -412,11 +1338,6 @@
     },
     "responses": {
       "en": {
-        "Answer Tag": [
-          {
-            "answer": "Answer Content"
-          }
-        ],
         "CS Department:major_declaration": [
           {
             "answer": "Students wishing to declare a BS in computer science should have completed the following courses with a GPA no lower than a 2.0: CSC 171: The Science of Programming CSC 172: The Science of Data Structures MATH 150: Discrete Mathematics MATH 161-162 or MATH 141-143 or MATH 171-172. Please visit https://www.cs.rochester.edu/undergraduate/declaring_major.html for more info."
@@ -425,6 +1346,36 @@
         "CS Department:department_info": [
           {
             "answer": "\"The Department of Computer Science at the University of Rochester is well known for its research and collegial atmosphere. Computer science plays a pervasive and pivotal role in our lives today. Research by the URCS faculty has impact on both the infrastructure and the applications of computing"
+          }
+        ],
+        "ResLife:room_change": [
+          {
+            "answer": "\"The first thing to try is fixing the problem with your roommate and mediating. Don't forget to inform your RA. If things really don't workout"
+          }
+        ],
+        "ResLife:roommate_choice": [
+          {
+            "answer": "\"When you fill out your housing application"
+          }
+        ],
+        "CCAS:procedure_overload": [
+          {
+            "answer": "\"Overloading (as per UR Student automatic system) is more than 19 credit hours per semester. To be able to take more than that amount"
+          }
+        ],
+        "CCAS:procedure_add_drop": [
+          {
+            "answer": "\"Students can drop/swap or add courses in UR Student until the end of the drop/add period. First-year students and sophomores are required to communicate with their advisor before dropping or swapping within UR Student. (See the UR Student training page for information on how to drop or swap a course"
+          }
+        ],
+        "CCAS:study_abroad": [
+          {
+            "answer": "\"Students can study abroad after completing one year at the University of Rochester. However"
+          }
+        ],
+        "ResLife:policy_items": [
+          {
+            "answer": "Yes. Please refer to our guidelines when purchasing microwaves and refrigerators. The size limit on any refrigerator is 4.3 cubic feet. Microwaves may not exceed 900 watts. Any refrigerator over that size will not be permitted into the residence hall. A micro-fridge which is an approved appliance with a combination a microwave and refrigerator can be rented for the academic year."
           }
         ]
       }
