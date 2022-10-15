@@ -1,5 +1,5 @@
 For frontend:
 
-- open web-frontend
+- open web-app
 - run `npm install`
 - run `npm run start`

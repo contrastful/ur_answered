@@ -7,7 +7,8 @@ const stream = fs.createReadStream("./data/qna.csv");
 const rl = readline.createInterface({ input: stream });
 let data = [];
 
-const qnaDatabase = {}
+const qnaMap = {}
+const database = []
 
 const manager = new NlpManager({ languages: ['en'], forceNER: true, nlu: { useNoneFeature: false } });
 
@@ -27,10 +28,14 @@ rl.on("close", () => {
         // Define the answer
         manager.addAnswer('en', questionTag, answer);
         console.log(`Adding answer ${ questionTag }: ${ answer }`)
-        qnaDatabase[questionTag] = {
+        qnaMap[questionTag] = {
             question: questions[0],
             answer
         }
+
+        database.push({
+            category, questions, questionTag, answer, status: true
+        })
 
         questions.forEach(question => {
             // Train the model on the questions leading to given answer
@@ -46,7 +51,10 @@ rl.on("close", () => {
 });
 
 const express = require('express')
+const cors = require('cors')
+
 const app = express()
+app.use(cors())
 
 app.get('/', function (req, res) {
     res.send('Hello World')
@@ -70,7 +78,7 @@ app.get('/query', async (req, res) => {
     let answer = null
 
     if (topPossibility.score > 0.15) {
-        answer = qnaDatabase[topPossibility.intent]
+        answer = qnaMap[topPossibility.intent]
     }
 
     return res.json({
@@ -80,10 +88,14 @@ app.get('/query', async (req, res) => {
         classifications: response.classifications.map(c => {
             return {
                 classification: c,
-                qna: qnaDatabase[c.intent]
+                qna: qnaMap[c.intent]
             }
         })
     })
+})
+
+app.get('/admin/questions', (req, res) => {
+    return res.json(database)
 })
 
 app.listen(8080)
