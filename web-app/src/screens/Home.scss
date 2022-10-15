@@ -1,60 +1,149 @@
-@import '../colors.scss';
+@import "../colors.scss";
 
 .home {
-    min-height: 100vh;
-    min-width: 100vw;
+  min-height: 100vh;
+  min-width: 100vw;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-image: linear-gradient($urBlue, lighten($urBlue, 10));
+  color: white;
+
+  .container {
+    margin-top: 5rem;
+    text-align: center;
+  }
+
+  .heading {
     display: flex;
-    justify-content: center;
-    background-image: linear-gradient($urBlue, lighten($urBlue, 10));
-    color: white;
-    // align-items: center;
+    flex-direction: column;
+    align-items: center;
+    max-width: 50%;
+    margin: auto;
+  }
 
-    .container {
-        margin-top: 5rem;
-        width: 100%;
-        max-width: 430px;
+  .icon {
+    max-width: 70%;
+  }
+
+  .heading p {
+    margin-top: 0;
+    font-size: 18px;
+  }
+
+  .searchBar {
+    margin-top: 2rem;
+
+    input.search {
+      background: transparent;
+      color: white;
+      font-size: 24px;
+      outline: none;
+      border: none;
+      border-bottom: 2px solid rgb(185, 185, 185);
+      transition: all 0.3s;
+      padding: 1rem 1rem 0.7rem 0;
+      width: 50%;
+      margin: auto;
+      font-family: "Nunito Sans", sans-serif;
+
+      &::placeholder {
+        font-family: "Nunito Sans", sans-serif;
+        transition: all 0.3s;
+        color: rgb(185, 185, 185);
         text-align: center;
-    }
+        font-size: 28px;
+      }
 
-    .heading p {
-        font-size: 18px;
-    }
-
-    .searchBar {
-        margin-top: 4rem;
-        // padding: 5rem 3rem 0;
-
-        input.search {
-            background: transparent;
-            color: white;
-            font-size: 24px;
-            outline: none;
-            border: none;
-            border-bottom: 2px solid rgb(185, 185, 185);
-            transition: all .3s;
-            padding: 1rem 1rem 0.7rem 0;
-            width: 100%;
-            font-family: 'Nunito Sans', sans-serif;
-            font-weight: 800;
-
-            &::placeholder {
-                font-family: 'Nunito Sans', sans-serif;
-                font-weight: 200;
-                transition: all .3s;
-                color: rgb(185, 185, 185);
-                text-align: center;
-                font-size: 28px;
-            }
-    
-            &:focus, &:hover {
-                &::placeholder {
-                    color: white;
-                    // font-size: 30px;
-                }
-
-                border-bottom-color: white;
-                transform: scale(1.05);
-            }
+      &:focus,
+      &:hover {
+        &::placeholder {
+          color: white;
         }
+
+        border-bottom-color: white;
+        transform: scale(1.05);
+      }
     }
+  }
+  div.chat {
+    display: flex;
+    flex-direction: column;
+    margin-top: 3rem;
+    font-size: larger;
+    transition: all 0.3s;
+    max-width: 50%;
+    margin: auto;
+
+    p.matchedQuestion {
+      max-width: 50%;
+      padding: 0.5rem;
+      border-radius: 10px;
+      background-color: $urBlue;
+    }
+
+    p.response {
+      max-width: 50%;
+      padding: 0.5rem;
+      border-radius: 10px;
+      background-color: $urYellow;
+      align-self: flex-end;
+    }
+  }
+
+  .searchBar {
+    margin-top: 4rem;
+    // padding: 5rem 3rem 0;
+
+    input.search {
+      background: transparent;
+      color: white;
+      font-size: 24px;
+      outline: none;
+      border: none;
+      border-bottom: 2px solid rgb(185, 185, 185);
+      transition: all 0.3s;
+      padding: 1rem 1rem 0.7rem 0;
+      width: 100%;
+      font-family: "Nunito Sans", sans-serif;
+      font-weight: 800;
+
+      &::placeholder {
+        font-family: "Nunito Sans", sans-serif;
+        font-weight: 200;
+        transition: all 0.3s;
+        color: rgb(185, 185, 185);
+        text-align: center;
+        font-size: 28px;
+      }
+
+      &:focus,
+      &:hover {
+        &::placeholder {
+          color: white;
+          // font-size: 30px;
+        }
+
+        border-bottom-color: white;
+        transform: scale(1.05);
+      }
+    }
+  }
+
+  div.related {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  button.relatedQuestion {
+    color: white;
+    background-color: $urBlue;
+    border: none;
+    padding: 1rem;
+    border-radius: 10px;
+    margin: 0.25rem;
+    font-size: large;
+  }
 }
