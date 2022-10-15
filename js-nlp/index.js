@@ -1,58 +1,29 @@
-const { NlpManager } = require('node-nlp');
-const fs = require("fs");
-const readline = require("readline");
-const stream = fs.createReadStream("./data/qna.csv");
-
-// NL Training
-const rl = readline.createInterface({ input: stream });
-let data = [];
-
-const qnaDatabase = {}
-
-const manager = new NlpManager({ languages: ['en'], forceNER: true, nlu: { useNoneFeature: false } });
-
-rl.on("line", (row) => {
-    data.push(row.split(","));
-});
- 
-rl.on("close", () => {
-    data.forEach(row => {
-        if (row[0] === "Department") return
-
-        const category = row[0]
-        const questions = row[1].split(';').map(q => q.trim())
-        const questionTag = row[2]
-        const answer = row[3]
-
-        // Define the answer
-        manager.addAnswer('en', questionTag, answer);
-        console.log(`Adding answer ${ questionTag }: ${ answer }`)
-        qnaDatabase[questionTag] = {
-            question: questions[0],
-            answer
-        }
-
-        questions.forEach(question => {
-            // Train the model on the questions leading to given answer
-            console.log(`Adding question: ${ question } => ${ questionTag }`)
-            manager.addDocument('en', question, questionTag);
-        })
-    })
-
-    // Train and save the model.
-    manager.train().then(async () => {
-        manager.save();
-    })
-});
-
 const express = require('express')
+const cors = require('cors')
+const nlp = require('./nlp')
+
+let qnaMap = {}
+let database = []
+let manager = null
+
+nlp.train().then(() => {
+    setTimeout(() => {
+        manager = nlp.getManager()
+        database = nlp.getDatabase()
+        qnaMap = nlp.getQnaMap()
+    }, 500) // Unneccessary but just in case
+})
+
 const app = express()
+app.use(cors())
 
 app.get('/', function (req, res) {
     res.send('Hello World')
 })
 
 app.get('/query', async (req, res) => {
+    if (!manager) return null
+
     const query = req.query.q
 
     const response = await manager.process('en', query);
@@ -70,7 +41,7 @@ app.get('/query', async (req, res) => {
     let answer = null
 
     if (topPossibility.score > 0.15) {
-        answer = qnaDatabase[topPossibility.intent]
+        answer = qnaMap[topPossibility.intent]
     }
 
     return res.json({
@@ -80,10 +51,16 @@ app.get('/query', async (req, res) => {
         classifications: response.classifications.map(c => {
             return {
                 classification: c,
-                qna: qnaDatabase[c.intent]
+                qna: qnaMap[c.intent]
             }
         })
     })
+})
+
+app.get('/admin/questions', (req, res) => {
+    if (!database) return null
+
+    return res.json(database)
 })
 
 app.listen(8080)

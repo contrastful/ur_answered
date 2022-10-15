@@ -91,6 +91,45 @@
     }
   }
 
+  .searchBar {
+    margin-top: 4rem;
+    // padding: 5rem 3rem 0;
+
+    input.search {
+      background: transparent;
+      color: white;
+      font-size: 24px;
+      outline: none;
+      border: none;
+      border-bottom: 2px solid rgb(185, 185, 185);
+      transition: all 0.3s;
+      padding: 1rem 1rem 0.7rem 0;
+      width: 100%;
+      font-family: "Nunito Sans", sans-serif;
+      font-weight: 800;
+
+      &::placeholder {
+        font-family: "Nunito Sans", sans-serif;
+        font-weight: 200;
+        transition: all 0.3s;
+        color: rgb(185, 185, 185);
+        text-align: center;
+        font-size: 28px;
+      }
+
+      &:focus,
+      &:hover {
+        &::placeholder {
+          color: white;
+          // font-size: 30px;
+        }
+
+        border-bottom-color: white;
+        transform: scale(1.05);
+      }
+    }
+  }
+
   div.related {
     display: flex;
     flex-direction: column;
