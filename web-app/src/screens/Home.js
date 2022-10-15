@@ -1,6 +1,14 @@
 import './Home.scss'
+import ScrollReveal from 'scrollreveal'
+import {useEffect} from 'react'
 
 function Home() {
+    useEffect(() => {
+        ScrollReveal().reveal('.heading', { delay: 0, duration: 1000, distance: '10px' })
+        ScrollReveal().reveal('.searchBar', { delay: 500, duration: 1000, distance: '10px' })
+
+    });
+
     return (
         <div class="home">
             <div class="container">
