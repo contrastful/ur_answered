@@ -2,10 +2,17 @@ const express = require('express')
 const cors = require('cors')
 const nlp = require('./nlp')
 
-nlp.train()
-const manager = nlp.manager
-const database = nlp.database
-const qnaMap = nlp.qnaMap
+let qnaMap = {}
+let database = []
+let manager = null
+
+nlp.train().then(() => {
+    setTimeout(() => {
+        manager = nlp.getManager()
+        database = nlp.getDatabase()
+        qnaMap = nlp.getQnaMap()
+    }, 500) // Unneccessary but just in case
+})
 
 const app = express()
 app.use(cors())
@@ -15,6 +22,8 @@ app.get('/', function (req, res) {
 })
 
 app.get('/query', async (req, res) => {
+    if (!manager) return null
+
     const query = req.query.q
 
     const response = await manager.process('en', query);
@@ -49,6 +58,8 @@ app.get('/query', async (req, res) => {
 })
 
 app.get('/admin/questions', (req, res) => {
+    if (!database) return null
+
     return res.json(database)
 })
 

@@ -1,17 +1,16 @@
 const { NlpManager } = require('node-nlp');
 const fs = require("fs");
-const readline = require("readline");
 const csv = require('fast-csv');
 const path = require('path');
 
-const qnaMap = {}
-const database = []
-const manager = null
+let qnaMap = {}
+let database = []
+let manager = null
 
 const train = async () => {
-    const qnaMap = {}
-    const database = []
-    const manager = new NlpManager({ languages: ['en'], forceNER: true, nlu: { useNoneFeature: false } })
+    qnaMap = {}
+    database = []
+    manager = new NlpManager({ languages: ['en'], forceNER: true, nlu: { useNoneFeature: false } })
     
     await fs.createReadStream(path.resolve(__dirname, 'data', 'qna.csv'))
         .pipe(csv.parse({ headers: true }))
@@ -33,7 +32,7 @@ const train = async () => {
             }
 
             database.push({
-                category, questions, questionTag, answer, status: true
+                category, questions, questionTag, answer, status: true, askedCount: row['Asked Count'], askedBy: row['Asked By']
             })
 
             questions.forEach(question => {
@@ -51,6 +50,10 @@ const train = async () => {
         })
 }
 
+const getQnaMap = () => qnaMap
+const getDatabase = () => database
+const getManager = () => manager
+
 module.exports = { 
-    qnaMap, database, manager, train
+    getQnaMap, getDatabase, getManager, train
 }
