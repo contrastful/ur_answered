@@ -1,0 +1,440 @@
+{
+  "settings": {
+    "languages": [
+      "en"
+    ],
+    "forceNER": true,
+    "nlu": {
+      "useNoneFeature": true
+    },
+    "tag": "nlp",
+    "threshold": 0.5,
+    "autoLoad": true,
+    "autoSave": true,
+    "modelFileName": "model.nlp",
+    "calculateSentiment": true
+  },
+  "nluManager": {
+    "settings": {
+      "tag": "nlu-manager",
+      "useNoneFeature": true
+    },
+    "locales": [
+      "en"
+    ],
+    "languageNames": {},
+    "domainManagers": {
+      "en": {
+        "settings": {
+          "locale": "en",
+          "useNoneFeature": true,
+          "trainByDomain": false,
+          "tag": "domain-manager-en",
+          "nluByDomain": {
+            "default": {
+              "className": "NeuralNlu",
+              "settings": {}
+            }
+          },
+          "useStemDict": true
+        },
+        "stemDict": {
+          "question,semicolon-delimit": {
+            "intent": "Answer Tag",
+            "domain": "default"
+          },
+          "cs,declar,do,how,i,major,my": {
+            "intent": "CS Department:major_declaration",
+            "domain": "default"
+          },
+          "a,class,cs,do,for,i,major,need,what": {
+            "intent": "CS Department:major_declaration",
+            "domain": "default"
+          },
+          "cs,depart,for,i,in,is,known,major,should,the,what,whi": {
+            "intent": "CS Department:department_info",
+            "domain": "default"
+          }
+        },
+        "intentDict": {
+          "Answer Tag": "default",
+          "CS Department:major_declaration": "default",
+          "CS Department:department_info": "default"
+        },
+        "sentences": [
+          {
+            "domain": "default",
+            "utterance": "Question (semicolon-delimited)",
+            "intent": "Answer Tag"
+          },
+          {
+            "domain": "default",
+            "utterance": "How do I declare my CS major?",
+            "intent": "CS Department:major_declaration"
+          },
+          {
+            "domain": "default",
+            "utterance": "What classes do I need for a CS major?",
+            "intent": "CS Department:major_declaration"
+          },
+          {
+            "domain": "default",
+            "utterance": "What is the CS department known for? Why should I major in CS?",
+            "intent": "CS Department:department_info"
+          }
+        ],
+        "domains": {
+          "master_domain": {
+            "settings": {
+              "locale": "en",
+              "tag": "nlu-en",
+              "keepStopwords": true,
+              "nonefeatureValue": 1,
+              "nonedeltaMultiplier": 1.2,
+              "spellCheck": false,
+              "spellCheckDistance": 1,
+              "filterZeros": true,
+              "log": true
+            },
+            "features": {
+              "question": 1,
+              "semicolon-delimit": 1,
+              "how": 1,
+              "do": 1,
+              "i": 1,
+              "declar": 1,
+              "my": 1,
+              "cs": 1,
+              "major": 1,
+              "what": 1,
+              "class": 1,
+              "need": 1,
+              "for": 1,
+              "a": 1,
+              "is": 1,
+              "the": 1,
+              "depart": 1,
+              "known": 1,
+              "whi": 1,
+              "should": 1,
+              "in": 1
+            },
+            "intents": {
+              "Answer Tag": 1,
+              "CS Department:major_declaration": 1,
+              "CS Department:department_info": 1
+            },
+            "intentFeatures": {
+              "Answer Tag": {
+                "question": 1,
+                "semicolon-delimit": 1
+              },
+              "CS Department:major_declaration": {
+                "how": 1,
+                "do": 1,
+                "i": 1,
+                "declar": 1,
+                "my": 1,
+                "cs": 1,
+                "major": 1,
+                "what": 1,
+                "class": 1,
+                "need": 1,
+                "for": 1,
+                "a": 1
+              },
+              "CS Department:department_info": {
+                "what": 1,
+                "is": 1,
+                "the": 1,
+                "cs": 1,
+                "depart": 1,
+                "known": 1,
+                "for": 1,
+                "whi": 1,
+                "should": 1,
+                "i": 1,
+                "major": 1,
+                "in": 1
+              }
+            },
+            "featuresToIntent": {
+              "question": [
+                "Answer Tag"
+              ],
+              "semicolon-delimit": [
+                "Answer Tag"
+              ],
+              "how": [
+                "CS Department:major_declaration"
+              ],
+              "do": [
+                "CS Department:major_declaration"
+              ],
+              "i": [
+                "CS Department:major_declaration",
+                "CS Department:department_info"
+              ],
+              "declar": [
+                "CS Department:major_declaration"
+              ],
+              "my": [
+                "CS Department:major_declaration"
+              ],
+              "cs": [
+                "CS Department:major_declaration",
+                "CS Department:department_info"
+              ],
+              "major": [
+                "CS Department:major_declaration",
+                "CS Department:department_info"
+              ],
+              "what": [
+                "CS Department:major_declaration",
+                "CS Department:department_info"
+              ],
+              "class": [
+                "CS Department:major_declaration"
+              ],
+              "need": [
+                "CS Department:major_declaration"
+              ],
+              "for": [
+                "CS Department:major_declaration",
+                "CS Department:department_info"
+              ],
+              "a": [
+                "CS Department:major_declaration"
+              ],
+              "is": [
+                "CS Department:department_info"
+              ],
+              "the": [
+                "CS Department:department_info"
+              ],
+              "depart": [
+                "CS Department:department_info"
+              ],
+              "known": [
+                "CS Department:department_info"
+              ],
+              "whi": [
+                "CS Department:department_info"
+              ],
+              "should": [
+                "CS Department:department_info"
+              ],
+              "in": [
+                "CS Department:department_info"
+              ]
+            },
+            "neuralNetwork": {
+              "settings": {
+                "useNoneFeature": true,
+                "locale": "en",
+                "tag": "nlu-en",
+                "keepStopwords": true,
+                "nonefeatureValue": 1,
+                "nonedeltaMultiplier": 1.2,
+                "spellCheck": false,
+                "spellCheckDistance": 1,
+                "filterZeros": true,
+                "log": true
+              },
+              "features": [
+                "question",
+                "semicolon-delimit",
+                "how",
+                "do",
+                "i",
+                "declar",
+                "my",
+                "cs",
+                "major",
+                "what",
+                "class",
+                "need",
+                "for",
+                "a",
+                "is",
+                "the",
+                "depart",
+                "known",
+                "whi",
+                "should",
+                "in",
+                "nonefeature"
+              ],
+              "intents": [
+                "Answer Tag",
+                "CS Department:major_declaration",
+                "CS Department:department_info",
+                "None"
+              ],
+              "perceptrons": [
+                [
+                  6.1495041847229,
+                  6.1495041847229,
+                  -0.215573251247406,
+                  -0.31194671988487244,
+                  -0.39979463815689087,
+                  -0.215573251247406,
+                  -0.215573251247406,
+                  -0.39979463815689087,
+                  -0.39979463815689087,
+                  -0.18079672753810883,
+                  -0.09286539256572723,
+                  -0.09286539256572723,
+                  -0.18079672753810883,
+                  -0.09286539256572723,
+                  -0.0851001888513565,
+                  -0.0851001888513565,
+                  -0.0851001888513565,
+                  -0.0851001888513565,
+                  -0.0851001888513565,
+                  -0.0851001888513565,
+                  -0.0851001888513565,
+                  -1.8456804752349854,
+                  1.948084028420341
+                ],
+                [
+                  -0.28280240297317505,
+                  -0.28280240297317505,
+                  1.6686116456985474,
+                  3.2190895080566406,
+                  1.8458895683288574,
+                  1.6686116456985474,
+                  1.6686116456985474,
+                  1.8458895683288574,
+                  1.8458895683288574,
+                  0.1772257387638092,
+                  1.5504261255264282,
+                  1.5504261255264282,
+                  0.1772257387638092,
+                  1.5504261255264282,
+                  -1.1507477760314941,
+                  -1.1507477760314941,
+                  -1.1507477760314941,
+                  -1.1507477760314941,
+                  -1.1507477760314941,
+                  -1.1507477760314941,
+                  -1.1507477760314941,
+                  -0.5125351548194885,
+                  0.5226876548169519
+                ],
+                [
+                  -0.07870776206254959,
+                  -0.07870776206254959,
+                  -0.3849920928478241,
+                  -1.3096402883529663,
+                  0.2793002128601074,
+                  -0.3849920928478241,
+                  -0.3849920928478241,
+                  0.2793002128601074,
+                  0.2793002128601074,
+                  0.7775372862815857,
+                  -0.7898257374763489,
+                  -0.7898257374763489,
+                  0.7775372862815857,
+                  -0.7898257374763489,
+                  1.6943309307098389,
+                  1.6943309307098389,
+                  1.6943309307098389,
+                  1.6943309307098389,
+                  1.6943309307098389,
+                  1.6943309307098389,
+                  1.6943309307098389,
+                  -0.11420764774084091,
+                  0.032533421325109106
+                ],
+                [
+                  -1.8430408239364624,
+                  -1.8430408239364624,
+                  -0.37995681166648865,
+                  -0.5494213104248047,
+                  -0.7004693150520325,
+                  -0.37995681166648865,
+                  -0.37995681166648865,
+                  -0.7004693150520325,
+                  -0.7004693150520325,
+                  -0.31928765773773193,
+                  -0.16833901405334473,
+                  -0.16833901405334473,
+                  -0.31928765773773193,
+                  -0.16833901405334473,
+                  -0.1503879576921463,
+                  -0.1503879576921463,
+                  -0.1503879576921463,
+                  -0.1503879576921463,
+                  -0.1503879576921463,
+                  -0.1503879576921463,
+                  -0.1503879576921463,
+                  10.13537883758545,
+                  3.807861688299607
+                ]
+              ]
+            }
+          }
+        }
+      }
+    },
+    "intentDomains": {},
+    "extraSentences": [
+      [
+        "en",
+        "Question (semicolon-delimited)"
+      ],
+      [
+        "en",
+        "How do I declare my CS major?"
+      ],
+      [
+        "en",
+        "What classes do I need for a CS major?"
+      ],
+      [
+        "en",
+        "What is the CS department known for? Why should I major in CS?"
+      ]
+    ]
+  },
+  "ner": {
+    "settings": {
+      "tag": "ner",
+      "entityPreffix": "%",
+      "entitySuffix": "%"
+    },
+    "rules": {}
+  },
+  "nlgManager": {
+    "settings": {
+      "tag": "nlg-manager"
+    },
+    "responses": {
+      "en": {
+        "Answer Tag": [
+          {
+            "answer": "Answer Content"
+          }
+        ],
+        "CS Department:major_declaration": [
+          {
+            "answer": "Students wishing to declare a BS in computer science should have completed the following courses with a GPA no lower than a 2.0: CSC 171: The Science of Programming CSC 172: The Science of Data Structures MATH 150: Discrete Mathematics MATH 161-162 or MATH 141-143 or MATH 171-172. Please visit https://www.cs.rochester.edu/undergraduate/declaring_major.html for more info."
+          }
+        ],
+        "CS Department:department_info": [
+          {
+            "answer": "\"The Department of Computer Science at the University of Rochester is well known for its research and collegial atmosphere. Computer science plays a pervasive and pivotal role in our lives today. Research by the URCS faculty has impact on both the infrastructure and the applications of computing"
+          }
+        ]
+      }
+    }
+  },
+  "actionManager": {
+    "settings": {
+      "tag": "action-manager"
+    },
+    "actions": {}
+  },
+  "slotManager": {}
+}
