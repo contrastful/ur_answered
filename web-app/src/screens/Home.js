@@ -1,6 +1,5 @@
 import "./Home.scss";
 import ScrollReveal from "scrollreveal";
-import TextareaAutosize from "react-textarea-autosize";
 import { useEffect, useState } from "react";
 
 function Home() {
@@ -22,23 +21,28 @@ function Home() {
   });
 
   const onSubmit = async (e, queryOverride = null) => {
-    if (e) e.preventDefault()
+    if (e) e.preventDefault();
 
     try {
-      const res = await fetch(`http://localhost:8080/query?q=${queryOverride ? queryOverride : searchQuery}`, {
-        method: "GET",
-        mode: "cors",
-      });
+      const res = await fetch(
+        `http://dandyhacks.up.railway.app/query?q=${
+          queryOverride ? queryOverride : searchQuery
+        }`,
+        {
+          method: "GET",
+          mode: "cors",
+        }
+      );
       const response = await res.json();
 
-      console.log(response)
+      console.log(response);
       setAnswer(response.answer.answer);
       setClassifications(
-        response.classifications.map(entry => {
+        response.classifications.map((entry) => {
           return {
             matchedQuestion: entry.qna.question,
             score: entry.classification.score,
-          }
+          };
         })
       );
       // setSearchQuery("")
@@ -48,16 +52,16 @@ function Home() {
           // reset: true,
           delay: 0,
           duration: 1000,
-          distance: "10px"
+          distance: "10px",
         });
 
         ScrollReveal().reveal(".related", {
           // reset: true,
           delay: 500,
           duration: 1000,
-          distance: "10px"
+          distance: "10px",
         });
-      }, 50)
+      }, 50);
 
       if (e) e.target.scrollIntoView({ behavior: "smooth", block: "start" });
       // If low score: Was one of these your question?
@@ -85,7 +89,10 @@ function Home() {
           <p>Ask a question.</p>
         </div>
 
-        <div class="searchBar" style={{ marginTop: classifications ? '1rem' : '1rem'}}>
+        <div
+          class="searchBar"
+          style={{ marginTop: classifications ? "1rem" : "1rem" }}
+        >
           <form action="" onSubmit={onSubmit}>
             <input
               type="text"
@@ -110,7 +117,7 @@ function Home() {
           )}
           <p class="response chatMessage">{answer}</p>
         </div>
-      ) : null }
+      ) : null}
 
       {answer && classifications && classifications.length > 0 ? (
         <div class="related">
@@ -121,13 +128,13 @@ function Home() {
                 href="#"
                 class="relatedQuestion"
                 onClick={async (e) => {
-                  e.preventDefault()
+                  e.preventDefault();
                   setSearchQuery(classifications[1].matchedQuestion);
-                  setAnswer(null)
-                  setClassifications(null)
+                  setAnswer(null);
+                  setClassifications(null);
                   setTimeout(() => {
                     onSubmit(null, classifications[1].matchedQuestion);
-                  }, 30)
+                  }, 30);
                 }}
               >
                 {classifications[1].matchedQuestion}
@@ -139,13 +146,13 @@ function Home() {
                 href="#"
                 class="relatedQuestion"
                 onClick={async (e) => {
-                  e.preventDefault()
+                  e.preventDefault();
                   setSearchQuery(classifications[2].matchedQuestion);
-                  setAnswer(null)
-                  setClassifications(null)
+                  setAnswer(null);
+                  setClassifications(null);
                   setTimeout(() => {
                     onSubmit(null, classifications[2].matchedQuestion);
-                  }, 30)
+                  }, 30);
                 }}
               >
                 {classifications[2].matchedQuestion}
@@ -154,7 +161,7 @@ function Home() {
           </div>
         </div>
       ) : null}
-      </div>
+    </div>
   );
 }
 
