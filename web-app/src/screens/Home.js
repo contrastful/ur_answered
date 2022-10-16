@@ -1,11 +1,22 @@
 import "./Home.scss";
 import ScrollReveal from "scrollreveal";
 import { useEffect, useState } from "react";
+import { Dropdown } from "primereact/dropdown";
 
 function Home() {
   const [searchQuery, setSearchQuery] = useState("");
   const [answer, setAnswer] = useState(null);
   const [classifications, setClassifications] = useState(null);
+
+  const [department, setDepartment] = useState(null);
+
+  const departmentOptions = [
+    { label: "CCAS", value: "CCAS" },
+    { label: "CS Department", value: "CS Department" },
+    { label: "Residential Life", value: "ResLife" },
+    { label: "Financial Aid", value: "FinAid" },
+    { label: "ISO", value: "ISO" },
+  ];
 
   useEffect(() => {
     ScrollReveal().reveal(".heading", {
@@ -159,6 +170,48 @@ function Home() {
               </a>
             ) : null}
           </div>
+        </div>
+      ) : null}
+
+      {answer &&
+      classifications &&
+      classifications.length > 0 &&
+      classifications[0].score < 0.8 ? (
+        <div class="form">
+          <form
+            class="questionForm"
+            action=""
+            onSubmit={(e) => {
+              e.preventDefault();
+            }}
+          >
+            <h3>Don't see your question? Be the first to ask!</h3>
+
+            <label htmlFor="email">Student email</label>
+            <input class="formInput" type="text" name="email" />
+
+            <div class="dropdownContainer">
+              <label htmlFor="department">Department</label>
+              <Dropdown
+                className="dropdown"
+                value={department}
+                onChange={(e) => setDepartment(e.value)}
+                options={departmentOptions}
+                style={{
+                  width: "50%",
+                  backgroundColor: "transparent",
+                  marginBottom: "2rem",
+                  marginTop: "0.5rem",
+                  color: "white",
+                }}
+              />
+            </div>
+
+            <label htmlFor="question">Question</label>
+            <input class="formInput" type="text" name="question" size="50" />
+
+            <input class="submit" type="submit" value="Submit" />
+          </form>
         </div>
       ) : null}
     </div>
