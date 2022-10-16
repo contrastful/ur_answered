@@ -69,7 +69,7 @@ const Questions = () => {
         return (
             <div>
                 <Button label="Question irrelevant" icon="pi pi-trash" onClick={() => setActive(null)} className="p-button-text" />
-                <Button label="Save answer" icon="pi pi-check" onClick={() => setActive(null)} autoFocus />
+                <Button label="Save & update" icon="pi pi-check" onClick={() => setActive(null)} autoFocus />
             </div>
         );
     }

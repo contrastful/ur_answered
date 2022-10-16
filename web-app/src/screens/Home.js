@@ -1,11 +1,12 @@
 import "./Home.scss";
 import ScrollReveal from "scrollreveal";
+import TextareaAutosize from "react-textarea-autosize";
 import { useEffect, useState } from "react";
 
 function Home() {
   const [searchQuery, setSearchQuery] = useState("");
   const [answer, setAnswer] = useState(null);
-  const [classifications, setClassifications] = useState();
+  const [classifications, setClassifications] = useState(null);
 
   useEffect(() => {
     ScrollReveal().reveal(".heading", {
@@ -20,33 +21,45 @@ function Home() {
     });
   });
 
-  useEffect(() => {
-    ScrollReveal().reveal(".chat", {
-      delay: 0,
-      duration: 1000,
-      distance: "10px",
-    });
-  }, [answer]);
-
-  const onSubmit = async (e) => {
-    e.preventDefault();
+  const onSubmit = async (e, queryOverride = null) => {
+    if (e) e.preventDefault()
 
     try {
-      const res = await fetch(`http://localhost:8080/query?q=${searchQuery}`, {
+      const res = await fetch(`http://localhost:8080/query?q=${queryOverride ? queryOverride : searchQuery}`, {
         method: "GET",
         mode: "cors",
       });
       const response = await res.json();
 
+      console.log(response)
       setAnswer(response.answer.answer);
       setClassifications(
-        response.classifications.map((entry) => ({
-          matchedQuestion: entry.qna.question,
-          score: entry.classification.score,
-        }))
+        response.classifications.map(entry => {
+          return {
+            matchedQuestion: entry.qna.question,
+            score: entry.classification.score,
+          }
+        })
       );
+      // setSearchQuery("")
 
-      e.target.scrollIntoView({ behavior: "smooth", block: "start" });
+      setTimeout(() => {
+        ScrollReveal().reveal(".chatMessage", {
+          // reset: true,
+          delay: 0,
+          duration: 1000,
+          distance: "10px"
+        });
+
+        ScrollReveal().reveal(".related", {
+          // reset: true,
+          delay: 500,
+          duration: 1000,
+          distance: "10px"
+        });
+      }, 50)
+
+      if (e) e.target.scrollIntoView({ behavior: "smooth", block: "start" });
       // If low score: Was one of these your question?
       // Prompt to fill out a form
     } catch (error) {
@@ -63,71 +76,85 @@ function Home() {
     <div class="home">
       <div class="container">
         <div class="heading">
-          <img
+          {/* <img
             src="../icon.jpg"
             alt="Icon with text 'UR Answered'"
             class="icon"
-          />
+          /> */}
           <h1>Welcome to Rochester!</h1>
           <p>Ask a question.</p>
         </div>
 
-        <div class="searchBar">
+        <div class="searchBar" style={{ marginTop: classifications ? '1rem' : '1rem'}}>
           <form action="" onSubmit={onSubmit}>
             <input
               type="text"
-              class="search"
+              className="search"
               placeholder="How can we help?"
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-            ></input>
+              // minRows={ 1 }
+              // maxRows={ 4 }
+            />
             {/* <input type="submit" /> */}
           </form>
         </div>
-
-        {answer !== null && (
-          <div class="chat">
-            {classifications !== undefined && (
-              <p class="matchedQuestion">
-                {classifications[0].matchedQuestion}
-              </p>
-            )}
-            {<p class="response">{answer}</p>}
-          </div>
-        )}
-
-        {answer !== null && (
-          <>
-            <h2>Related questions</h2>
-            <div class="related">
-              {classifications[1] !== undefined && (
-                <button
-                  class="relatedQuestion"
-                  onClick={async (e) => {
-                    setSearchQuery(classifications[1].matchedQuestion);
-                    await onSubmit(e);
-                  }}
-                >
-                  {classifications[1].matchedQuestion}
-                </button>
-              )}
-
-              {classifications[2] !== undefined && (
-                <button
-                  class="relatedQuestion"
-                  onClick={async (e) => {
-                    setSearchQuery(classifications[2].matchedQuestion);
-                    await onSubmit(e);
-                  }}
-                >
-                  {classifications[2].matchedQuestion}
-                </button>
-              )}
-            </div>
-          </>
-        )}
       </div>
-    </div>
+
+      {answer ? (
+        <div class="chat">
+          {classifications != null && (
+            <p class="matchedQuestion chatMessage">
+              {classifications[0].matchedQuestion}
+            </p>
+          )}
+          <p class="response chatMessage">{answer}</p>
+        </div>
+      ) : null }
+
+      {answer && classifications && classifications.length > 0 ? (
+        <div class="related">
+          <h2>Related questions</h2>
+          <div>
+            {classifications[1] ? (
+              <a
+                href="#"
+                class="relatedQuestion"
+                onClick={async (e) => {
+                  e.preventDefault()
+                  setSearchQuery(classifications[1].matchedQuestion);
+                  setAnswer(null)
+                  setClassifications(null)
+                  setTimeout(() => {
+                    onSubmit(null, classifications[1].matchedQuestion);
+                  }, 30)
+                }}
+              >
+                {classifications[1].matchedQuestion}
+              </a>
+            ) : null}
+
+            {classifications[2] ? (
+              <a
+                href="#"
+                class="relatedQuestion"
+                onClick={async (e) => {
+                  e.preventDefault()
+                  setSearchQuery(classifications[2].matchedQuestion);
+                  setAnswer(null)
+                  setClassifications(null)
+                  setTimeout(() => {
+                    onSubmit(null, classifications[2].matchedQuestion);
+                  }, 30)
+                }}
+              >
+                {classifications[2].matchedQuestion}
+              </a>
+            ) : null}
+          </div>
+        </div>
+      ) : null}
+      </div>
   );
 }
 
