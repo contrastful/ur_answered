@@ -7,8 +7,28 @@ import { Card } from 'primereact/card';
 import { StyleClass } from 'primereact/styleclass';
 import { Button } from 'primereact/button'
 import Questions from "./Questions";
+import { useEffect, useState } from "react";
 
 const Dashboard = () => {
+    const [stats, saveStats] = useState(null)
+
+    const dbLoaded = (data) => {
+        console.log(data)
+        if (data) {
+            let entryCount = 0
+            let unansweredCount = 0
+            data.forEach(row => {
+                entryCount += row.questions.length
+
+                if (!row.answer) unansweredCount++
+            })
+
+            saveStats({
+                entryCount, answerCount: 0, unansweredCount
+            })
+        }
+    }
+
     return (
         <div class="admin">
             <div class="container">
@@ -30,15 +50,15 @@ const Dashboard = () => {
                             <div className="flex align-items-center text-700 flex-wrap">
                                 <div className="mr-5 flex align-items-center mt-3">
                                     <i className="pi pi-database mr-2"></i>
-                                    <span>128 Knowledge Entries</span>
+                                    <span>{ stats ? stats.entryCount : '...' } Knowledge Entries</span>
                                 </div>
                                 <div className="mr-5 flex align-items-center mt-3">
                                     <i className="pi pi-users mr-2"></i>
-                                    <span>102 AI Queries Answered</span>
+                                    <span>{ stats ? stats.answerCount : '...' } AI Queries Answered</span>
                                 </div>
                                 <div className="mr-5 flex align-items-center mt-3">
                                     <i className="pi pi-question mr-2"></i>
-                                    <span>12 Unanswered Questions</span>
+                                    <span>{ stats ? stats.unansweredCount : '...' } Unanswered Questions</span>
                                 </div>
                             </div>
                         </div>
@@ -50,7 +70,7 @@ const Dashboard = () => {
                 </div>
         
                 <Card>
-                    <Questions />
+                    <Questions onDbLoaded={ (data) => dbLoaded(data) } />
                 </Card>
             </div>
         </div>

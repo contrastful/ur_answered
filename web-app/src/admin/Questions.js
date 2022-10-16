@@ -1,19 +1,22 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { classNames } from 'primereact/utils';
 import { FilterMatchMode } from 'primereact/api';
 import { DataTable } from 'primereact/datatable';
 import { Column } from 'primereact/column';
 import { Tag } from 'primereact/tag';
 import { Chip } from 'primereact/chip';
-import { Dialog } from 'primereact/dialog';
+import { Toast } from 'primereact/toast';
 import { Button } from 'primereact/button';
+import { Dialog } from 'primereact/dialog';
 import { TriStateCheckbox } from 'primereact/tristatecheckbox';
 import './DataTableDemo.css';
 import QuestionsService from './service/QuestionService';
+import EditEntry from './EditEntry';
 
-const Questions = () => {
+const Questions = (props) => {
     const [questions, setQuestions] = useState(null);
     const [active, setActive] = useState(null);
+    const toast = useRef(null);
 
     const [filters, setFilters] = useState({
         'category': { value: null, matchMode: FilterMatchMode.CONTAINS },
@@ -24,7 +27,7 @@ const Questions = () => {
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
-        QuestionsService.fetchQuestions().then(data => { setQuestions(data); setLoading(false) });
+        QuestionsService.fetchQuestions().then(data => { setQuestions(data); setLoading(false); props.onDbLoaded(data) });
     }, []);
 
     useEffect(() => {
@@ -69,13 +72,15 @@ const Questions = () => {
         return (
             <div>
                 <Button label="Question irrelevant" icon="pi pi-trash" onClick={() => setActive(null)} className="p-button-text" />
-                <Button label="Save & update" icon="pi pi-check" onClick={() => setActive(null)} autoFocus />
+                <Button label="Save changes" icon="pi pi-check" onClick={() => { setActive(null); toast.current.show({severity:'success', summary: 'Success', detail:'Model retraining.', life: 3000})}} autoFocus />
             </div>
         );
     }
 
     return (
         <div>
+            <Toast ref={toast} />
+
             <Dialog
                 header="Knowledge entry"
                 maximizable={ true }
@@ -88,44 +93,7 @@ const Questions = () => {
             >
                 { active ? (
                     <div>
-                        <div className="text-500 mb-5">Morbi tristique blandit turpis. In viverra ligula id nulla hendrerit rutrum.</div>
-                        <ul className="list-none p-0 m-0">
-                            <li className="flex align-items-center py-3 px-2 border-top-1 border-300 flex-wrap">
-                                <div className="text-500 w-6 md:w-2 font-medium">Question ID</div>
-                                <div className="text-900 w-full md:w-8 md:flex-order-0 flex-order-1">
-                                    { active.questionTag }
-                                </div>
-                                <div className="w-6 md:w-2 flex justify-content-end">
-                                    <Button label="Edit" icon="pi pi-pencil" className="p-button-text" />
-                                </div>
-                            </li>
-                            <li className="flex align-items-center py-3 px-2 border-top-1 border-300 flex-wrap">
-                                <div className="text-500 w-6 md:w-2 font-medium">Questions</div>
-                                <div className="text-900 w-full md:w-8 md:flex-order-0 flex-order-1">
-                                   { active.questions.map(q =>
-                                        <Chip label={ q } className="mr-2" />
-                                   )}
-                                </div>
-                                <div className="w-6 md:w-2 flex justify-content-end">
-                                    <Button label="Edit" icon="pi pi-pencil" className="p-button-text" />
-                                </div>
-                            </li>
-                            <li className="flex align-items-center py-3 px-2 border-top-1 border-300 flex-wrap">
-                                <div className="text-500 w-6 md:w-2 font-medium">Answer</div>
-                                <div className="text-900 w-full md:w-8 md:flex-order-0 flex-order-1">
-                                    { active.answer ? active.answer : <Chip label='Awaiting answer' /> }
-                                </div>
-                                <div className="w-6 md:w-2 flex justify-content-end">
-                                    <Button label="Edit" icon="pi pi-pencil" className="p-button-text" />
-                                </div>
-                            </li>
-                            <li className="flex align-items-center py-3 px-2 border-top-1 border-300 flex-wrap">
-                                <div className="text-500 w-6 md:w-2 font-medium">Asked by</div>
-                                <div className="text-900 w-full md:w-8 md:flex-order-0 flex-order-1">
-                                    { active.askedBy ? active.askedBy : <Chip label='Sourced from knowledge base' /> }
-                                </div>
-                            </li>
-                        </ul>
+                        <EditEntry entry={ active } />
                     </div>
                 ) : null }
             </Dialog>

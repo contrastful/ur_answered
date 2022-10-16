@@ -43,9 +43,8 @@ body {
     }
 
     .questionLink {
-        text-decoration: none;
+        text-decoration: underline;
         color: inherit;
-        border-bottom: 1px solid $urBlue;
         transition: all .3s;
         display: inline-block;
 

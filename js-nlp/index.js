@@ -44,6 +44,10 @@ app.get('/query', async (req, res) => {
         answer = qnaMap[topPossibility.intent]
     }
 
+    if (answer) {
+        // Update number of queries
+    }
+
     return res.json({
         success: answer ? true : false,
         intent: topPossibility,
