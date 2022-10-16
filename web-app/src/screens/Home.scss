@@ -2,23 +2,26 @@
 
 .home {
   min-height: 100vh;
-  min-width: 100vw;
   display: flex;
   flex-direction: column;
   align-items: center;
   background-image: linear-gradient($urBlue, lighten($urBlue, 10));
   color: white;
+  padding-left: 1rem;
+  padding-right: 1rem;
 
   .container {
     margin-top: 5rem;
     text-align: center;
+    width: 100%;
+    max-width: 550px;
   }
 
   .heading {
     display: flex;
     flex-direction: column;
     align-items: center;
-    max-width: 50%;
+    // max-width: 100%;
     margin: auto;
   }
 
@@ -34,7 +37,7 @@
   .searchBar {
     margin-top: 2rem;
 
-    input.search {
+    .search {
       background: transparent;
       color: white;
       font-size: 24px;
@@ -43,9 +46,10 @@
       border-bottom: 2px solid rgb(185, 185, 185);
       transition: all 0.3s;
       padding: 1rem 1rem 0.7rem 0;
-      width: 50%;
       margin: auto;
       font-family: "Nunito Sans", sans-serif;
+      width: 100%;
+      margin-bottom: 1rem;
 
       &::placeholder {
         font-family: "Nunito Sans", sans-serif;
@@ -72,61 +76,34 @@
     margin-top: 3rem;
     font-size: larger;
     transition: all 0.3s;
-    max-width: 50%;
+    width: 100%;
+    max-width: 900px;
     margin: auto;
+
+    p {
+      word-wrap: break-word;
+    }
+
+    .chatMessage {
+      visibility: hidden;
+    }
 
     p.matchedQuestion {
       max-width: 50%;
-      padding: 0.5rem;
+      padding: 1rem;
       border-radius: 10px;
       background-color: $urBlue;
     }
 
     p.response {
-      max-width: 50%;
-      padding: 0.5rem;
+      max-width: 80%;
+      padding: 1rem;
       border-radius: 10px;
-      background-color: $urYellow;
+      background-color: $urBlue;
+      border-bottom: 2px solid $urYellow;
       align-self: flex-end;
-    }
-  }
-
-  .searchBar {
-    margin-top: 4rem;
-    // padding: 5rem 3rem 0;
-
-    input.search {
-      background: transparent;
-      color: white;
-      font-size: 24px;
-      outline: none;
-      border: none;
-      border-bottom: 2px solid rgb(185, 185, 185);
-      transition: all 0.3s;
-      padding: 1rem 1rem 0.7rem 0;
-      width: 100%;
-      font-family: "Nunito Sans", sans-serif;
-      font-weight: 800;
-
-      &::placeholder {
-        font-family: "Nunito Sans", sans-serif;
-        font-weight: 200;
-        transition: all 0.3s;
-        color: rgb(185, 185, 185);
-        text-align: center;
-        font-size: 28px;
-      }
-
-      &:focus,
-      &:hover {
-        &::placeholder {
-          color: white;
-          // font-size: 30px;
-        }
-
-        border-bottom-color: white;
-        transform: scale(1.05);
-      }
+      border-bottom-left-radius: 0;
+      border-bottom-right-radius: 0;
     }
   }
 
@@ -135,15 +112,27 @@
     flex-direction: column;
     align-items: center;
     justify-content: space-between;
+    visibility: hidden;
+    margin-bottom: 4rem;
   }
 
-  button.relatedQuestion {
+  .relatedQuestion {
     color: white;
     background-color: $urBlue;
     border: none;
     padding: 1rem;
     border-radius: 10px;
-    margin: 0.25rem;
+    border-bottom-width: 2px;
+    margin: 0.4rem;
     font-size: large;
+    font-family: "Nunito Sans", sans-serif;
+    cursor: pointer;
+    transition: all .3s;
+    text-decoration: none;
+    display: inline-block;
+
+    &:hover {
+      transform: translateY(-4px);
+    }
   }
 }

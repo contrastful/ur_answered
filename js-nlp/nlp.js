@@ -16,12 +16,12 @@ const train = async () => {
         .pipe(csv.parse({ headers: true }))
         .on('error', error => console.error(error))
         .on('data', row => {
-            if (row[0] === "Department") return
-
             const category = row['Department']
             const questions = row['Question (semicolon-delimited)'].split(';')
             const questionTag = row['Question Intent']
             const answer = row['Answer Content']
+
+            if (!answer) return
 
             // Define the answer
             manager.addAnswer('en', questionTag, answer);
