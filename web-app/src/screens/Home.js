@@ -82,6 +82,21 @@ function Home() {
       setAnswer(
         "Could not find a suitable answer. Please try being more specific."
       );
+      setTimeout(() => {
+        ScrollReveal().reveal(".chatMessage", {
+          // reset: true,
+          delay: 0,
+          duration: 1000,
+          distance: "10px",
+        });
+
+        ScrollReveal().reveal(".related", {
+          // reset: true,
+          delay: 500,
+          duration: 1000,
+          distance: "10px",
+        });
+      }, 50);
 
       console.error(error);
     }
@@ -97,7 +112,7 @@ function Home() {
             class="icon"
           /> */}
           <h1>Welcome to Rochester!</h1>
-          <p>Ask a question.</p>
+          <p>Our AI-driven tool connects you to all the UR information you need.</p>
         </div>
 
         <div
