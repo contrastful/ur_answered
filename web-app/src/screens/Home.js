@@ -36,7 +36,7 @@ function Home() {
 
     try {
       const res = await fetch(
-        `http://dandyhacks.up.railway.app/query?q=${
+        `http://localhost:8080/query?q=${
           queryOverride ? queryOverride : searchQuery
         }`,
         {
@@ -74,7 +74,7 @@ function Home() {
         });
       }, 50);
 
-      if (e) e.target.scrollIntoView({ behavior: "smooth", block: "start" });
+      // if (e) e.target.scrollIntoView({ behavior: "smooth", block: "start" });
       // If low score: Was one of these your question?
       // Prompt to fill out a form
     } catch (error) {

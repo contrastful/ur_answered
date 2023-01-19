@@ -58,7 +58,7 @@ const Questions = (props) => {
     const questionBodyTemplate = (rowData) => {
         return (
             <div>
-                <a href="#" class="questionLink" onClick={() => { setActive(rowData) }}>{ rowData.questions[0] }</a>
+                <a href="#" class="questionLink" onClick={(e) => { e.preventDefault(); setActive(rowData) }}>{ rowData.questions[0] }</a>
                 {
                     rowData.questions.length > 1 ? (
                         <Chip label={ `+${ rowData.questions.length - 1 }` } style={{ transform: 'scale(0.8)', marginLeft: '.5rem' }} />
