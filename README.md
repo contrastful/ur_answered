@@ -9,15 +9,22 @@ Built as a demo during DandyHacks '22 to help our university answer new student 
 - A user-friendly React + Sass widget with a chatbot-like interface for students to ask questions.
 - An admin panel where administrators can answer questions for which the AI couldn't derive an answer. After each update, the NLP model then retrains itself automatically.
 
+## Challenges we ran into
+- Lack of centralized knowledge. Maybe we could train our model on non-sensitive emails?
+
 ## Demo
 
 ![The student-facing UI](./demo-1.png)
-![The widget can be placed in any relevant place on the school website](./demo-2.png)
-![A centralized knowledge management app for the University](./demo-3.png)
-![Admins from various departments can answer questions that haven't yet been answered. This triggers NLP model retraining.](./demo-4.png)
+*The student-facing UI*
 
-## Challenges we ran into
-- Lack of centralized knowledge. Maybe we could train our model on non-sensitive emails?
+![The widget can be placed in any relevant place on the school website](./demo-2.png)
+*The widget can be placed in any relevant place on the school website*
+
+![A centralized knowledge management app for the University](./demo-3.png)
+*A centralized knowledge management app for the University*
+
+![Admins from various departments can answer questions that haven't yet been answered. This triggers NLP model retraining.](./demo-4.png)
+*Admins from various departments can answer questions that haven't yet been answered. This triggers NLP model retraining.*
 
 ## For frontend:
 
